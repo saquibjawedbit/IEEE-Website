@@ -3,97 +3,127 @@
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
-   NavigationMenuItem,
+  NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
- } from "@/components/ui/navigation-menu";
+} from "@/components/ui/navigation-menu";
 import { Menu, MoveRight, X } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Link from "next/link";
 import Image from "next/image";
+import { cn } from "@/lib/utils";
 
 function Header1() {
-  type NavigationItem = {
-    title: string;
-    href: string; // Made href required since we don't have nested items
-  };
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [isOpen, setOpen] = useState(false);
 
-  const navigationItems: NavigationItem[] = [
-    {
-      title: "Events",
-      href: "/events",
-    },
-    {
-      title: "Alumni",
-      href: "/alumni",
-    },
-    {
-      title: "Workshop",
-      href: "/workshop",
-    },
-    {
-      title: "About Us",
-      href: "/about-us",
-    },
-    {
-      title: "Our Team",
-      href: "/team",
-    },
-    {
-      title: "Contact Us",
-      href: "/contact",
-    },
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  const navigationItems = [
+    { title: "Events", href: "/events" },
+    { title: "Alumni", href: "/alumni" },
+    { title: "Workshop", href: "/workshop" },
+    { title: "About Us", href: "/about-us" },
+    { title: "Our Team", href: "/team" },
+    { title: "Contact Us", href: "/contact" },
   ];
 
-  const [isOpen, setOpen] = useState(false);
   return (
-    <div className="flex z-40 fixed top-0 left-0 justify-center rounded-xl border-b-4 items-center w-full">
-      <header className="w-3/4 text-white border-b border-slate-800">
-        <div className="container relative mx-auto min-h-20 flex gap-4 flex-row lg:grid lg:grid-cols-3 items-center">
-          <div className="flex items-center gap-2">
-            <Link href="/">
-              <Image src="/logo.png" alt="IEEE Logo" width={50} height={50} priority />
+    <div className={cn(
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+      isScrolled ? "py-2" : "py-4"
+    )}>
+      <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
+        <div className={cn(
+          "rounded-full border border-white/10 transition-all duration-300",
+          isScrolled ? "bg-black/50" : "bg-black/20",
+          "backdrop-blur-md"
+        )}>
+          <div className="flex items-center justify-between px-4 py-2">
+            <Link href="/" className="flex items-center gap-2">
+              <Image 
+                src="/logo.png" 
+                alt="IEEE Logo" 
+                width={40} 
+                height={40} 
+                className="transition-transform duration-300 hover:scale-110"
+                priority 
+              />
+              <span className="font-semibold text-white hidden sm:block">
+                 BIT Mesra
+              </span>
             </Link>
-          </div>
-          <div className="justify-center items-center gap-4 lg:flex hidden flex-row">
-            <NavigationMenu>
-              <NavigationMenuList className="flex justify-start gap-4 flex-row">
-                {navigationItems.map((item) => (
-                  <NavigationMenuItem key={item.title}>
-                    <Link href={item.href} legacyBehavior passHref>
-                      <NavigationMenuLink>
-                        <Button variant="ghost">{item.title}</Button>
-                      </NavigationMenuLink>
-                    </Link>
-                  </NavigationMenuItem>
-                ))}
-              </NavigationMenuList>
-            </NavigationMenu>
-          </div>
-          <div className="flex justify-end w-full gap-4">
-            <Button variant="default">Join Us</Button>
+
+            {/* Desktop Navigation */}
+            <div className="hidden lg:flex items-center gap-1">
+              <NavigationMenu>
+                <NavigationMenuList className="flex gap-1">
+                  {navigationItems.map((item) => (
+                    <NavigationMenuItem key={item.title}>
+                      <Link href={item.href} legacyBehavior passHref>
+                        <NavigationMenuLink>
+                          <Button 
+                            variant="ghost" 
+                            className="text-white/70 hover:text-white hover:bg-white/10 rounded-full px-4"
+                          >
+                            {item.title}
+                          </Button>
+                        </NavigationMenuLink>
+                      </Link>
+                    </NavigationMenuItem>
+                  ))}
+                </NavigationMenuList>
+              </NavigationMenu>
+              <Button 
+                variant="default" 
+                className="ml-4 bg-blue-500 hover:bg-blue-600 rounded-full"
+              >
+                Join Us
+              </Button>
+            </div>
+
+            {/* Mobile Menu Button */}
+            <Button 
+              variant="ghost" 
+              onClick={() => setOpen(!isOpen)}
+              className="lg:hidden text-white/70 hover:text-white hover:bg-white/10"
+            >
+              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
+            </Button>
           </div>
 
           {/* Mobile Menu */}
-          <div className="flex w-12 shrink lg:hidden items-end justify-end">
-            <Button variant="ghost" onClick={() => setOpen(!isOpen)}>
-              {isOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
-            </Button>
-            {isOpen && (
-              <div className="absolute top-20 border-t border-slate-800 flex flex-col w-full right-0 bg-slate-900 shadow-lg py-4 container gap-8">
+          {isOpen && (
+            <div className="lg:hidden border-t border-white/10">
+              <nav className="flex flex-col gap-2 p-4">
                 {navigationItems.map((item) => (
-                  <div key={item.title}>
-                    <Link href={item.href} className="flex justify-between items-center">
-                      <span className="text-lg">{item.title}</span>
-                      <MoveRight className="w-4 h-4 stroke-1 text-slate-400" />
-                    </Link>
-                  </div>
+                  <Link 
+                    key={item.title}
+                    href={item.href}
+                    className="flex items-center justify-between py-2 px-4 rounded-lg hover:bg-white/10 text-white/70 hover:text-white transition-colors"
+                    onClick={() => setOpen(false)}
+                  >
+                    <span>{item.title}</span>
+                    <MoveRight className="w-4 h-4 opacity-50" />
+                  </Link>
                 ))}
-              </div>
-            )}
-          </div>
+                <Button 
+                  variant="default" 
+                  className="mt-2 bg-blue-500 hover:bg-blue-600 rounded-lg w-full"
+                >
+                  Join Us
+                </Button>
+              </nav>
+            </div>
+          )}
         </div>
-      </header>
+      </div>
     </div>
   );
 }

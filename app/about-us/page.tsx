@@ -5,7 +5,7 @@ import { Meteors } from "@/components/ui/meteor";
 import Image from "next/image";
 import Link from "next/link";
 import { motion } from "framer-motion";
-import { ArrowRight, Code, Users, Trophy, Target, BookOpen, Rocket, Heart } from "lucide-react";
+import { ArrowRight, Code, Users, Heart, Target, Trophy } from "lucide-react";
 
 export default function AboutUsPage() {
   const milestones = [

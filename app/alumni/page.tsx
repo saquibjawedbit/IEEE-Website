@@ -1,7 +1,6 @@
 "use client";
 import { Header1 } from "@/components/ui/header";
 import { LinkedinIcon, MailIcon, Building2, MapPin, Quote, ArrowRight, Search, Filter } from "lucide-react";
-import Link from "next/link";
 import Image from "next/image";
 import { motion } from "framer-motion";
 import { Footer } from "@/components/ui/footer";

@@ -144,7 +144,7 @@ export default function WorkshopPage() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 0.3 }}
-          className="grid grid-cols-2 md:grid-cols-4 gap-6 max-w-5xl mx-auto mb-20"
+          className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 max-w-5xl mx-auto mb-20 px-4"
         >
           {stats.map((stat, index) => {
             const Icon = stat.icon;
@@ -167,12 +167,12 @@ export default function WorkshopPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.4 }}
-          className="max-w-6xl mx-auto mb-20"
+          className="max-w-6xl mx-auto mb-20 px-4"
         >
           <h2 className="text-3xl font-bold text-white text-center mb-12">
             Why Choose Our <span className="text-blue-400">Workshops?</span>
           </h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
             {benefits.map((benefit, index) => {
               const Icon = benefit.icon;
               return (
@@ -194,7 +194,7 @@ export default function WorkshopPage() {
         </motion.div>
         
         {/* Workshops Grid */}
-        <div className="max-w-6xl mx-auto space-y-8">
+        <div className="max-w-6xl mx-auto space-y-8 px-4">
           <h2 className="text-3xl font-bold text-white text-center mb-12">
             Available <span className="text-blue-400">Workshops</span>
           </h2>
@@ -205,13 +205,13 @@ export default function WorkshopPage() {
               animate={{ x: 0, opacity: 1 }}
               transition={{ delay: index * 0.2 }}
               whileHover={{ scale: 1.02 }}
-              className="bg-[#0A0A2C]/80 rounded-lg p-6 backdrop-blur-sm border border-white/10 group relative overflow-hidden"
+              className="bg-[#0A0A2C]/80 rounded-lg p-4 md:p-6 backdrop-blur-sm border border-white/10 group relative overflow-hidden"
             >
               <div className="absolute inset-0 bg-gradient-to-r from-blue-500/0 via-purple-500/0 to-rose-500/0 group-hover:from-blue-500/10 group-hover:via-purple-500/10 group-hover:to-rose-500/10 transition-all duration-500" />
               
-              <div className="flex items-start gap-6 relative z-10">
+              <div className="flex flex-col md:flex-row items-start gap-4 md:gap-6 relative z-10">
                 <motion.div 
-                  className="text-8xl font-bold text-white/10"
+                  className="text-6xl md:text-8xl font-bold text-white/10"
                   whileHover={{ scale: 1.1, color: "rgba(59, 130, 246, 0.2)" }}
                   transition={{ type: "spring", stiffness: 300 }}
                 >
@@ -219,8 +219,8 @@ export default function WorkshopPage() {
                 </motion.div>
                 
                 <div className="flex-1">
-                  <div className="flex justify-between items-start mb-4">
-                    <h2 className="text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
+                  <div className="flex flex-col sm:flex-row justify-between items-start gap-4 mb-4">
+                    <h2 className="text-xl md:text-2xl font-bold text-white group-hover:text-blue-400 transition-colors">
                       {workshop.title}
                     </h2>
                     <div className="flex items-center gap-4">
@@ -254,7 +254,7 @@ export default function WorkshopPage() {
                     ))}
                   </div>
                   
-                  <div className="mt-6 flex gap-4">
+                  <div className="mt-6 flex flex-wrap gap-4">
                     <motion.button 
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
@@ -283,7 +283,7 @@ export default function WorkshopPage() {
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           transition={{ delay: 0.6 }}
-          className="max-w-4xl mx-auto text-center mt-20 mb-12 bg-white/5 backdrop-blur-sm rounded-lg p-12 border border-white/10"
+          className="max-w-4xl mx-auto text-center mt-20 mb-12 bg-white/5 backdrop-blur-sm rounded-lg p-6 md:p-12 border border-white/10 mx-4"
         >
           <h2 className="text-3xl font-bold text-white mb-4">Ready to Start Learning?</h2>
           <p className="text-white/70 mb-8">Join our workshops and take your first step towards technical excellence</p>

@@ -36,13 +36,13 @@ function Header1() {
 
   return (
     <div className={cn(
-      "fixed top-0 left-0 right-0 z-50 transition-all duration-300",
+      "fixed top-0 left-0 right-0 z-50 transition-all duration-300 w-full",
       isScrolled ? "py-2" : "py-4"
     )}>
       <div className="mx-auto px-4 sm:px-6 lg:px-8 max-w-7xl">
         <div className={cn(
-          "rounded-full border border-white/10 transition-all duration-300",
-          isScrolled ? "bg-black/50" : "bg-black/20",
+          "transition-all duration-300 rounded-xl",
+          isScrolled ? "bg-white/20" : "bg-black/20",
           "backdrop-blur-md"
         )}>
           <div className="flex items-center justify-between px-4 py-2">
@@ -55,9 +55,6 @@ function Header1() {
                 className="transition-transform duration-300 hover:scale-110"
                 priority 
               />
-              <span className="font-semibold text-white hidden sm:block">
-                 BIT Mesra
-              </span>
             </Link>
 
             {/* Desktop Navigation */}
@@ -100,25 +97,27 @@ function Header1() {
 
           {/* Mobile Menu */}
           {isOpen && (
-            <div className="lg:hidden border-t border-white/10">
-              <nav className="flex flex-col gap-2 p-4">
+            <div className="lg:hidden absolute top-full left-0 right-0">
+              <nav className="flex flex-col max-w-7xl mx-auto bg-black/95 backdrop-blur-md border-t border-white/10 mt-2 mx-4 rounded-xl overflow-hidden">
                 {navigationItems.map((item) => (
                   <Link 
                     key={item.title}
                     href={item.href}
-                    className="flex items-center justify-between py-2 px-4 rounded-lg hover:bg-white/10 text-white/70 hover:text-white transition-colors"
+                    className="flex items-center justify-between px-6 py-4 border-b border-white/10 text-white/90 hover:bg-white/5 transition-all duration-200"
                     onClick={() => setOpen(false)}
                   >
-                    <span>{item.title}</span>
+                    <span className="font-medium text-lg">{item.title}</span>
                     <MoveRight className="w-4 h-4 opacity-50" />
                   </Link>
                 ))}
-                <Button 
-                  variant="default" 
-                  className="mt-2 bg-blue-500 hover:bg-blue-600 rounded-lg w-full"
-                >
-                  Join Us
-                </Button>
+                <div className="p-6">
+                  <Button 
+                    variant="default" 
+                    className="w-full bg-blue-500 hover:bg-blue-600 py-6 font-medium text-lg"
+                  >
+                    Join Us
+                  </Button>
+                </div>
               </nav>
             </div>
           )}

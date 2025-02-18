@@ -4,7 +4,7 @@ import { Header1 } from "@/components/ui/header";
 import { Meteors } from "@/components/ui/meteor";
 import { BackgroundSparkles } from "@/components/ui/animations/BackgroundSparkles";
 import { motion, useScroll, useTransform } from "framer-motion";
-import { Calendar, Users, Trophy, Code, Target, GitBranch, Cpu, Timer } from "lucide-react";
+import { Calendar, Users, Trophy, Code, Target, GitBranch, Timer , Cpu} from "lucide-react";
 import { useRef } from "react";
 import { Footer } from "@/components/ui/footer";
 
@@ -90,7 +90,7 @@ export default function EventsPage() {
   ];
 
   return (
-    <div ref={containerRef} className="min-h-screen bg-gradient-to-br from-indigo-900 via-[#030303] to-rose-900 relative overflow-hidden">
+    <div ref={containerRef} className="relative min-h-screen w-full overflow-x-hidden bg-gradient-to-br from-indigo-900 via-[#030303] to-rose-900">
       <BackgroundSparkles />
       <Header1 />
       

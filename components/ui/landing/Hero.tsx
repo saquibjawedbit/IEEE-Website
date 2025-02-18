@@ -14,13 +14,21 @@ function Hero() {
             />
             
             {/* Call to Action Buttons */}
-            <div className="absolute bottom-32 left-1/2 -translate-x-1/2 z-20 flex gap-4">
-                <Button asChild size="lg" className="bg-blue-500 hover:bg-blue-600">
+            <div className="absolute bottom-16 left-1/2 -translate-x-1/2 z-20 flex gap-4">
+                <Button 
+                    asChild 
+                    size="lg" 
+                    className="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold shadow-lg"
+                >
                     <Link href="/about-us">
                         Learn More <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                 </Button>
-                <Button variant="outline" size="lg" className="border-white/20 text-white hover:bg-white/10">
+                <Button 
+                    variant="outline" 
+                    size="lg" 
+                    className="border-2 border-white/80 text-black font-semibold hover:bg-white/10 hover:border-white shadow-lg backdrop-blur-sm"
+                >
                     <Link href="/events">View Events</Link>
                 </Button>
             </div>

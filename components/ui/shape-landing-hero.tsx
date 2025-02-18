@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import { Circle } from "lucide-react";
- import { cn } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 
 function ElegantShape({
   className,
@@ -190,7 +190,7 @@ function HeroGeometric({
             initial="hidden"
             animate="visible"
           >
-            <p className="text-base sm:text-lg md:text-xl text-blue-400 mb-8 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4">
+            <p className="text-base sm:text-lg md:text-xl text-blue-400 mb-24 leading-relaxed font-light tracking-wide max-w-xl mx-auto px-4">
               Advancing Technology for Humanity{" "}
             </p>
           </motion.div>

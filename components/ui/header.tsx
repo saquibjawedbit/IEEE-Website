@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import Link from "next/link";
 import Image from "next/image";
 import { useEffect, useState } from "react";
-import { Menu, X } from "lucide-react";
+import { Menu, X, UserIcon, LogOut } from "lucide-react";
 import { motion } from "framer-motion";
 import { Button } from "@/components/ui/button";
 import {
@@ -114,13 +114,14 @@ function Header1() {
                     </DropdownMenuLabel>
                     <DropdownMenuSeparator />
                     <DropdownMenuItem asChild>
-                      <Link href="/profile">Profile</Link>
-                    </DropdownMenuItem>
-                    <DropdownMenuItem asChild>
-                      <Link href="/dashboard">Dashboard</Link>
+                      <Link href="/profile" className="flex items-center gap-2">
+                        <UserIcon className="h-4 w-4" />
+                        Profile
+                      </Link>
                     </DropdownMenuItem>
                     <DropdownMenuSeparator />
-                    <DropdownMenuItem onClick={() => logout()}>
+                    <DropdownMenuItem onClick={() => logout()} className="flex items-center gap-2 text-red-500">
+                      <LogOut className="h-4 w-4" />
                       Log out
                     </DropdownMenuItem>
                   </DropdownMenuContent>

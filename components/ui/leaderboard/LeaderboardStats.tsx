@@ -16,23 +16,23 @@ export function LeaderboardStats({ stats }: LeaderboardStatsProps) {
     <motion.div 
       initial={{ opacity: 0, y: 20 }}
       animate={{ opacity: 1, y: 0 }}
-      className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-16"
+      className="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 mb-12 md:mb-16"
     >
       {stats.map((stat, index) => {
         const Icon = stat.icon;
         return (
           <motion.div
             key={index}
-            initial={{ scale: 0.9, opacity: 0 }}
-            animate={{ scale: 1, opacity: 1 }}
-            transition={{ delay: index * 0.1 }}
-            className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-xl p-4 flex flex-col items-center justify-center text-center"
+            initial={{ opacity: 0, scale: 0.9 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.3, delay: index * 0.1 }}
+            className="bg-white/5 backdrop-blur-md rounded-xl border border-white/10 p-3 md:p-6 flex flex-col items-center text-center"
           >
-            <div className="bg-blue-500/20 p-3 rounded-full mb-3">
-              <Icon className="h-6 w-6 text-blue-400" />
+            <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-blue-500/20 flex items-center justify-center mb-3 md:mb-4">
+              <Icon className="h-5 w-5 md:h-6 md:w-6 text-blue-400" />
             </div>
-            <h3 className="text-3xl font-bold text-white mb-1">{stat.value}</h3>
-            <p className="text-white/60 text-sm">{stat.label}</p>
+            <div className="text-xl md:text-3xl font-bold text-white mb-1">{stat.value}</div>
+            <div className="text-xs md:text-sm text-white/60">{stat.label}</div>
           </motion.div>
         );
       })}

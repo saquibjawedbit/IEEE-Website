@@ -70,13 +70,13 @@ export default function ContactPage() {
     {
       icon: Phone,
       title: "Phone",
-      details: ["+91 1234567890", "+91 9876543210"],
+      details: ["+91 9123388359", "+91 9876543210"],
       color: "text-green-400"
     },
     {
       icon: Mail,
       title: "Email",
-      details: ["ieee@bitmesra.ac.in", "contact@ieeebitmesra.com"],
+      details: ["ieee@bitmesra.ac.in"],
       color: "text-blue-400"
     },
     {

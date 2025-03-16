@@ -22,78 +22,81 @@ export function TopPerformers({ participants }: TopPerformersProps) {
     topThree[0] || null, // 1st place
     topThree[2] || null, // 3rd place
   ];
-
+  
   return (
-    <motion.div 
-      initial={{ opacity: 0, y: 20 }}
-      animate={{ opacity: 1, y: 0 }}
-      className="mt-12"
-    >
-      <h2 className="text-3xl font-bold text-white text-center mb-10">Top Performers</h2>
+    <div className="mt-12">
+      <h2 className="text-xl md:text-2xl font-bold text-white mb-8 text-center">Top Performers</h2>
       
-      <div className="flex flex-col md:flex-row justify-center items-end gap-4 md:gap-8">
+      <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-8">
         {arranged.map((participant, index) => {
-          const actualRank = index === 0 ? 2 : index === 1 ? 1 : 3;
-          const heights = ["h-64", "h-72", "h-60"];
-          const marginTop = index === 1 ? "" : "mt-8";
+          // Determine position (1st, 2nd, 3rd)
+          const position = index === 1 ? 0 : index === 0 ? 1 : 2;
+          
+          // Styling based on position
+          const isFirst = position === 0;
+          const cardSize = isFirst ? "w-full md:w-64 h-auto" : "w-full md:w-56 h-auto";
+          const avatarSize = isFirst ? "w-16 h-16 md:w-24 md:h-24" : "w-12 h-12 md:w-20 md:h-20";
+          const nameSize = isFirst ? "text-lg md:text-xl" : "text-base md:text-lg";
+          const scoreSize = isFirst ? "text-2xl md:text-3xl" : "text-xl md:text-2xl";
+          
+          // Medal emoji
+          const medal = position === 0 ? "🥇" : position === 1 ? "🥈" : "🥉";
           
           return (
             <motion.div
-              key={index}
+              key={position}
+              className={`${cardSize} bg-white/5 backdrop-blur-md rounded-xl border border-white/10 p-4 md:p-6 flex flex-col items-center ${isFirst ? "md:-mt-4" : ""}`}
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.2 }}
-              className={`relative ${heights[index]} w-full md:w-64 bg-gradient-to-b from-blue-500/20 to-transparent rounded-t-xl border-t border-l border-r border-white/10 flex flex-col items-center justify-end ${marginTop}`}
+              transition={{ duration: 0.3, delay: position * 0.1 }}
             >
               {participant ? (
                 <>
-                  <div className="absolute top-0 left-0 right-0 flex justify-center">
-                    <div className="bg-gradient-to-br from-blue-500 to-indigo-600 text-white rounded-full w-12 h-12 flex items-center justify-center -mt-6 border-2 border-white/20">
-                      {actualRank === 1 && <Trophy className="h-6 w-6" />}
-                      {actualRank === 2 && <span className="text-xl font-bold">2</span>}
-                      {actualRank === 3 && <span className="text-xl font-bold">3</span>}
+                  <div className="relative mb-4">
+                    <div className={`${avatarSize} rounded-full bg-blue-500/20 flex items-center justify-center overflow-hidden`}>
+                      {participant.avatar ? (
+                        <Image
+                          src={participant.avatar}
+                          alt={participant.name}
+                          width={isFirst ? 96 : 80}
+                          height={isFirst ? 96 : 80}
+                          className="rounded-full"
+                        />
+                      ) : (
+                        <Trophy className={`${isFirst ? "w-12 h-12" : "w-10 h-10"} text-blue-400`} />
+                      )}
+                    </div>
+                    <div className="absolute -top-2 -right-2 w-8 h-8 bg-blue-500/30 rounded-full flex items-center justify-center text-xl">
+                      {medal}
                     </div>
                   </div>
                   
-                  <div className="relative w-24 h-24 rounded-full overflow-hidden border-4 border-white/10 mb-4">
-                    <Image 
-                      src={participant.avatar || "/team/noimage.jpg"}
-                      alt={participant.name}
-                      fill
-                      className="object-cover"
-                    />
+                  <h3 className={`${nameSize} font-bold text-white mb-1 text-center truncate max-w-full`}>{participant.name}</h3>
+                  
+                  <div className="text-white/60 text-xs md:text-sm mb-3 text-center truncate max-w-full">
+                    @{participant.leetcodeHandle || participant.codeforcesHandle || participant.codechefHandle || "unknown"}
                   </div>
                   
-                  <h3 className="text-xl font-bold text-white mb-1">{participant.name}</h3>
-                  <p className="text-blue-400 mb-2">{participant.totalScore} points</p>
+                  <div className={`${scoreSize} font-bold text-blue-400 mb-1`}>
+                    {participant.totalScore || participant.leetcodeRating || participant.codeforcesRating || participant.codechefRating || 0}
+                  </div>
                   
-                  <div className="grid grid-cols-3 gap-2 w-full p-4 text-center text-xs">
-                    <div>
-                      <p className="text-white/60">LeetCode</p>
-                      <p className="text-white font-medium">{participant.leetcodeRating}</p>
-                    </div>
-                    <div>
-                      <p className="text-white/60">CodeForces</p>
-                      <p className="text-white font-medium">{participant.codeforcesRating}</p>
-                    </div>
-                    <div>
-                      <p className="text-white/60">CodeChef</p>
-                      <p className="text-white font-medium">{participant.codechefRating}</p>
-                    </div>
+                  <div className="text-white/60 text-xs md:text-sm">
+                    {participant.leetcodeProblemsSolved || participant.codeforcesProblemsSolved || 0} problems solved
                   </div>
                 </>
               ) : (
-                <div className="flex flex-col items-center justify-center p-8">
-                  <div className="w-24 h-24 rounded-full bg-white/5 mb-4 flex items-center justify-center">
-                    <Trophy className="h-8 w-8 text-white/20" />
+                <div className="flex flex-col items-center justify-center h-full">
+                  <div className={`${avatarSize} rounded-full bg-white/5 flex items-center justify-center mb-4`}>
+                    <Medal className="w-8 h-8 text-white/20" />
                   </div>
-                  <p className="text-white/40 text-center">Position Available</p>
+                  <p className="text-white/40 text-center">No participant yet</p>
                 </div>
               )}
             </motion.div>
           );
         })}
       </div>
-    </motion.div>
+    </div>
   );
 }
